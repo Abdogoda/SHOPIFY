@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J&T Express Shopify Plugin – Multilingual Interactive Help Center</title>
+  
+  <!-- Google Fonts for English, Arabic, and Chinese -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="shortcut icon" href="assets/favicon.png" />
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Multi-Theme Initialization (Prevents Theme Flicker) -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('jnt_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- J&T Express 3D Mascot Loader (Says Loading) -->
+  <div class="jnt-loader-screen" id="jnt-rabbit-loader" role="progressbar" aria-live="polite">
+    <div class="jnt-loader-container">
+      
+      <!-- 3D Mascot Stage with Speech Bubble -->
+      <div class="mascot-animation-stage">
+        <!-- Ambient Glowing Aura -->
+        <div class="mascot-ambient-aura"></div>
+
+        <!-- 3D Official Mascot Rabbit Image -->
+        <div class="mascot-avatar-wrap">
+          <img src="assets/jnt-rabbit-mascot.jpg" alt="J&T Express 3D Rabbit Mascot" class="mascot-img" />
+        </div>
+
+        <!-- Floating Interactive Speech Bubble Saying "Loading..." -->
+        <div class="mascot-speech-bubble" id="mascot-speech-bubble">
+          <span class="speech-icon">💬</span>
+          <span class="speech-text" id="mascot-speech-text">Loading...</span>
+          <span class="speech-dots">
+            <span></span><span></span><span></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Brand Badge & Progress Message -->
+      <div class="loader-content">
+        <div class="loader-brand-row">
+          <span class="loader-jnt-pill">J&T EXPRESS</span>
+          <span class="loader-speed-pill">
+            <svg class="shopify-icon-svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+              <path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/>
+            </svg>
+            <span>Official Shopify Plugin</span>
+          </span>
+        </div>
+        <h3 class="loader-title" id="loader-title">Loading Interactive Help Center...</h3>
+        
+        <!-- Animated Progress Bar -->
+        <div class="loader-progress-track">
+          <div class="loader-progress-fill" id="loader-progress-fill"></div>
+        </div>
+
+        <div class="loader-status-row">
+          <span class="loader-status-text" id="loader-status-text">Synchronizing logistics modules...</span>
+          <span class="loader-percent" id="loader-percent">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Reading Progress Bar -->
+  <div class="reading-progress-track">
+    <div class="reading-progress-bar" id="reading-progress-bar"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      
+      <!-- Brand & Sidebar Toggle -->
+      <div class="header-brand">
+        <button type="button" class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="Toggle Sidebar" title="Hide/Show Sidebar (Ctrl+B)">
+          <svg class="sidebar-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="3"></rect>
+            <path class="toggle-bar" d="M9 3v18"></path>
+            <path class="toggle-chevron" d="m14 9-3 3 3 3"></path>
+          </svg>
+        </button>
+
+        <a href="#" class="brand-logo-link" aria-label="J&T Express">
+          <img src="assets/jnt-logo.png" alt="J&T Express" class="jnt-header-logo" width="142" height="32" />
+        </a>
+      </div>
+
+      <!-- Real-Time Global Search Bar -->
+      <div class="header-search-container" id="header-search-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon-svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="global-search-input"
+            class="global-search-input"
+            placeholder="Search orders, waybills, printing labels, shipment tracking, troubleshooting... (Ctrl+K)"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search documentation"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          />
+          <button type="button" class="search-clear-btn" id="search-clear-btn" aria-label="Clear search" title="Clear search (Esc)" style="display: none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <kbd class="search-kbd-shortcut" title="Press Ctrl+K or / to search">Ctrl+K</kbd>
+        </div>
+
+        <!-- Real-Time Live Search Dropdown -->
+        <div class="search-dropdown-menu" id="search-dropdown-menu" role="listbox" style="display: none;">
+          <div class="search-dropdown-header" id="search-dropdown-header">
+            <span class="search-dropdown-count" id="search-dropdown-count">0 results</span>
+            <span class="search-dropdown-hint">Press <kbd>Esc</kbd> to dismiss</span>
+          </div>
+          <div class="search-dropdown-results" id="search-dropdown-results">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Actions, Theme Switcher & Language Switcher -->
+      <div class="header-actions">
+        <button type="button" class="header-quick-btn" id="btn-view-workflow">
+          <span>🔄</span>
+          <span id="btn-view-workflow-text">Interactive Workflow</span>
+        </button>
+
+        <!-- Multi-Theme Selector Dropdown -->
+        <div class="header-dropdown-wrap theme-switcher" id="theme-switcher">
+          <button type="button" class="header-dropdown-btn theme-toggle-btn" id="theme-toggle-btn" aria-label="Select Theme" aria-haspopup="true" aria-expanded="false" title="Switch Visual Theme" data-current-theme="light">
+            <span class="dropdown-icon-badge theme-icon-badge">
+              <span class="theme-btn-icon" id="theme-active-icon">☀️</span>
+            </span>
+            <span class="dropdown-btn-label theme-btn-label" id="theme-active-label">Light</span>
+            <svg class="dropdown-chevron theme-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          
+          <div class="header-dropdown-menu theme-dropdown-menu" id="theme-dropdown-menu" role="menu">
+            <button type="button" class="theme-option-btn active" data-theme="light" role="menuitem">
+              <span class="theme-opt-swatch swatch-light">☀️</span>
+              <div class="theme-opt-info">
+                <span class="theme-opt-name" id="theme-name-light">Light</span>
+                <span class="theme-opt-desc" id="theme-desc-light">Crisp &amp; Daytime</span>
+              </div>
+              <span class="theme-check-icon">✓</span>
+            </button>
+
+            <button type="button" class="theme-option-btn" data-theme="dark" role="menuitem">
+              <span class="theme-opt-swatch swatch-dark">🌙</span>
+              <div class="theme-opt-info">
+                <span class="theme-opt-name" id="theme-name-dark">Dark Slate</span>
+                <span class="theme-opt-desc" id="theme-desc-dark">Eye-friendly Night</span>
+              </div>
+              <span class="theme-check-icon">✓</span>
+            </button>
+
+            <button type="button" class="theme-option-btn" data-theme="midnight" role="menuitem">
+              <span class="theme-opt-swatch swatch-midnight">🔴</span>
+              <div class="theme-opt-info">
+                <span class="theme-opt-name" id="theme-name-midnight">Midnight Red</span>
+                <span class="theme-opt-desc" id="theme-desc-midnight">J&amp;T Crimson Edition</span>
+              </div>
+              <span class="theme-check-icon">✓</span>
+            </button>
+
+            <button type="button" class="theme-option-btn" data-theme="emerald" role="menuitem">
+              <span class="theme-opt-swatch swatch-emerald">🌲</span>
+              <div class="theme-opt-info">
+                <span class="theme-opt-name" id="theme-name-emerald">Shopify Emerald</span>
+                <span class="theme-opt-desc" id="theme-desc-emerald">Merchant Green Dark</span>
+              </div>
+              <span class="theme-check-icon">✓</span>
+            </button>
+
+            <div class="theme-divider"></div>
+
+            <button type="button" class="theme-option-btn" data-theme="auto" role="menuitem">
+              <span class="theme-opt-swatch swatch-auto">💻</span>
+              <div class="theme-opt-info">
+                <span class="theme-opt-name" id="theme-name-auto">System Sync</span>
+                <span class="theme-opt-desc" id="theme-desc-auto">Follow OS Preference</span>
+              </div>
+              <span class="theme-check-icon">✓</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Language Selector Dropdown -->
+        <div class="header-dropdown-wrap lang-dropdown-wrap" id="lang-dropdown-wrap">
+          <button type="button" class="header-dropdown-btn lang-toggle-btn" id="lang-toggle-btn" aria-label="Select Language" aria-haspopup="true" aria-expanded="false" title="Switch Language">
+            <span class="dropdown-icon-badge lang-icon-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </span>
+            <span class="dropdown-btn-label lang-active-label" id="lang-active-label">English</span>
+            <svg class="dropdown-chevron lang-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <div class="header-dropdown-menu lang-dropdown-menu" id="lang-dropdown-menu" role="menu">
+            <button type="button" class="lang-option-btn lang-btn" data-lang="ar" role="menuitem">
+              <span class="lang-opt-flag">🇸🇦</span>
+              <div class="lang-opt-info">
+                <span class="lang-opt-name">العربية</span>
+                <span class="lang-opt-sub">Arabic</span>
+              </div>
+              <span class="lang-check-icon">✓</span>
+            </button>
+
+            <button type="button" class="lang-option-btn lang-btn active" data-lang="en" role="menuitem">
+              <span class="lang-opt-flag">🇬🇧</span>
+              <div class="lang-opt-info">
+                <span class="lang-opt-name">English</span>
+                <span class="lang-opt-sub">English</span>
+              </div>
+              <span class="lang-check-icon">✓</span>
+            </button>
+
+            <button type="button" class="lang-option-btn lang-btn" data-lang="zh" role="menuitem">
+              <span class="lang-opt-flag">🇨🇳</span>
+              <div class="lang-opt-info">
+                <span class="lang-opt-name">简体中文</span>
+                <span class="lang-opt-sub">Chinese</span>
+              </div>
+              <span class="lang-check-icon">✓</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- App Layout (Sidebar + Main Content) -->
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-group-label" id="sidebar-group-label">Documentation Sections</div>
+      <ul class="sidebar-nav-list" id="sidebar-nav-container">
+        <!-- Rendered dynamically by js/app.js -->
+      </ul>
+    </aside>
+
+    <!-- Sidebar Navigation Backdrop for Mobile -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Hero Banner (Inspired by J&T Overview Tab) -->
+      <section class="hero-banner" id="hero-banner">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge-row">
+              <span class="hero-badge">
+                <svg class="shopify-icon-svg" viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                  <path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/>
+                </svg>
+                <span id="hero-badge-1">J&T Express Egypt × Shopify</span>
+              </span>
+              <span class="hero-badge">🌐 <span id="hero-badge-2">Multilingual Interactive Guide</span></span>
+            </div>
+            <h1 class="hero-title" id="hero-title">Connecting Egypt, Delivering the Future</h1>
+            <p class="hero-subtitle" id="hero-subtitle">
+              Complete interactive merchant guide for the J&T Express Shopify Plugin. Learn how to link your J&T VIP account, synchronize Shopify orders, print waybills, generate labels, and track shipments in real time.
+            </p>
+            <div class="hero-actions">
+              <button type="button" class="btn-hero-primary" id="hero-start-btn">
+                <span>⚡</span>
+                <span id="hero-start-text">Start Interactive Workflow</span>
+              </button>
+              <button type="button" class="btn-hero-secondary" id="hero-search-btn">
+                <span>🔍</span>
+                <span id="hero-search-text">Explore All Features</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-interactive-3d-wrap">
+            <!-- 3D Isometric Floating Parcel Stage -->
+            <div class="hero-3d-parcel-stage" id="hero-parcel-stage">
+              <div class="parcel-3d-scene" id="parcel-3d-scene">
+                <!-- 3D Parcel Box -->
+                <div class="parcel-cube-3d" id="parcel-cube-3d">
+                  <div class="cube-face face-front">
+                    <div class="parcel-shipping-label">
+                      <div class="label-header">J&T EXPRESS</div>
+                      <div class="label-sub">
+                        <svg class="shopify-icon-svg" viewBox="0 0 24 24" width="10" height="10" fill="currentColor" style="vertical-align: -1px; margin-inline-end: 2px;">
+                          <path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/>
+                        </svg>
+                        <span>SHOPIFY VIP PLUGIN</span>
+                      </div>
+                      <div class="label-code">CAI-EGY-09824</div>
+                      <div class="label-bars">|||| | |||| ||| ||</div>
+                    </div>
+                  </div>
+                  <div class="cube-face face-back">
+                    <div class="parcel-brand-back">
+                      <span class="back-jnt">J&T</span>
+                      <span class="back-txt">EGYPT</span>
+                    </div>
+                  </div>
+                  <div class="cube-face face-right">
+                    <div class="parcel-badge-tape">FRAGILE 易碎</div>
+                    <div class="cube-barcode">|||| |||| |||</div>
+                  </div>
+                  <div class="cube-face face-left">
+                    <div class="parcel-badge-tape">VIP EXPRESS</div>
+                    <div class="cube-barcode">||||||||||||</div>
+                  </div>
+                  <div class="cube-face face-top">
+                    <div class="cube-tape-cross"></div>
+                  </div>
+                  <div class="cube-face face-bottom"></div>
+                </div>
+
+                <!-- 3D Floor Shadow -->
+                <div class="parcel-floor-shadow"></div>
+              </div>
+
+              <!-- Feature Status Badges Container -->
+              <div class="orbit-chips-wrap" id="orbit-chips-wrap">
+                <div class="orbit-chip chip-1">
+                  <svg class="shopify-icon-svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                    <path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/>
+                  </svg>
+                  <span id="orbit-chip-1">Shopify Sync</span>
+                </div>
+                <div class="orbit-chip chip-2">🖨️ <span id="orbit-chip-2">Print Waybill</span></div>
+                <div class="orbit-chip chip-3">✈️ <span id="orbit-chip-3">In Transit</span></div>
+                <div class="orbit-chip chip-4">✓ <span id="orbit-chip-4">Delivered</span></div>
+              </div>
+            </div>
+
+            <!-- Stats Card with 3D Tilt -->
+            <div class="hero-stats-card tilt-3d" id="hero-stats-card">
+              <div class="hero-stat-item">
+                <span class="hero-stat-val" id="stat-sections-val">9</span>
+                <span class="hero-stat-label" id="stat-sections-label">Core Modules</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="hero-stat-val" id="stat-screenshots-val">22</span>
+                <span class="hero-stat-label" id="stat-screenshots-label">Real Plugin Screens</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="hero-stat-val" id="stat-tracking-val">100</span>
+                <span class="hero-stat-label" id="stat-tracking-label">Waybills / Query</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="hero-stat-val" id="stat-langs-val">3</span>
+                <span class="hero-stat-label" id="stat-langs-label">Languages (EN/AR/ZH)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- In-Page Real-Time Search Status Banner -->
+      <div class="search-status-banner" id="search-status-banner" style="display: none;">
+        <div class="search-status-info">
+          <span class="search-status-icon">🔍</span>
+          <span class="search-status-text" id="search-status-text">Showing 3 sections related to "waybill"</span>
+        </div>
+        <button type="button" class="btn-reset-search-filter" id="btn-reset-search-filter">
+          <span id="btn-reset-search-text">Show All Sections ✕</span>
+        </button>
+      </div>
+
+      <!-- Documentation Sections (1 to 9 rendered here) -->
+      <div id="docs-sections-container">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Screenshot Lightbox Modal -->
+  <div class="lightbox-backdrop" id="lightbox-backdrop">
+    <div class="lightbox-dialog" role="dialog" aria-modal="true">
+      <div class="lightbox-header">
+        <div class="lightbox-title-group">
+          <h3 id="lightbox-title">Screenshot Title</h3>
+          <p id="lightbox-counter" dir="ltr" style="unicode-bidi: isolate;">1 / 22</p>
+        </div>
+        <div class="lightbox-controls">
+          <div class="lightbox-btn-group">
+            <button type="button" class="lightbox-btn" id="lightbox-zoom-in" title="Zoom in (+)">
+              <svg class="lightbox-btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span id="lightbox-zoom-in-text">Zoom In</span>
+              <kbd class="lightbox-kbd">+</kbd>
+            </button>
+            <button type="button" class="lightbox-btn" id="lightbox-zoom-out" title="Zoom out (-)">
+              <svg class="lightbox-btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+              <span id="lightbox-zoom-out-text">Zoom Out</span>
+              <kbd class="lightbox-kbd">-</kbd>
+            </button>
+          </div>
+
+          <div class="lightbox-btn-group">
+            <button type="button" class="lightbox-btn" id="lightbox-prev-btn" title="Previous screenshot">
+              <svg class="lightbox-btn-icon nav-chevron-prev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <span id="lightbox-prev-text">Prev</span>
+            </button>
+            <button type="button" class="lightbox-btn" id="lightbox-next-btn" title="Next screenshot">
+              <span id="lightbox-next-text">Next</span>
+              <svg class="lightbox-btn-icon nav-chevron-next" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <button type="button" class="lightbox-btn btn-close" id="lightbox-close-btn" title="Close lightbox (Esc)">
+            <svg class="lightbox-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span id="lightbox-close-text">Close</span>
+            <kbd class="lightbox-kbd kbd-close">Esc</kbd>
+          </button>
+        </div>
+      </div>
+      <div class="lightbox-stage">
+        <img id="lightbox-img" src="" alt="Enlarged screenshot" />
+      </div>
+      <div class="lightbox-footer">
+        <p id="lightbox-desc"></p>
+        <div id="lightbox-hotspots"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple Scroll to Top Button -->
+  <button type="button" class="back-to-top-btn" id="back-to-top-btn" aria-label="العودة للأعلى" title="العودة للأعلى">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
+  <!-- Floating Chatbot Widget (Official 3D Rabbit Mascot Icon) -->
+  <button type="button" class="chatbot-fab" id="chatbot-fab" aria-label="Open J&T Documentation Assistant">
+    <span class="chatbot-fab-rabbit">
+      <img src="assets/jnt-rabbit-mascot.jpg" alt="J&T Rabbit Mascot" class="fab-rabbit-img" />
+    </span>
+    <span id="chatbot-fab-text">J&T Help Assistant</span>
+  </button>
+
+  <div class="chatbot-window" id="chatbot-window" role="dialog" aria-modal="false">
+    <div class="chatbot-header">
+      <div class="chatbot-header-info">
+        <div class="chatbot-avatar-group">
+          <div class="chatbot-avatar">J&T</div>
+          <div class="chatbot-avatar-shopify" title="Shopify Plugin">
+            <svg class="shopify-icon-svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+              <path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83zm1.235 2.949v.135c-.754.232-1.583.484-2.394.736.466-1.777 1.333-2.645 2.085-2.971.193.501.309 1.176.309 2.1zm.539-2.234c.694.074 1.141.867 1.429 1.755-.349.114-.735.231-1.158.366v-.252c0-.752-.096-1.371-.271-1.871v.002zm2.992 1.289c-.02 0-.06.021-.078.021s-.289.075-.714.21c-.423-1.233-1.176-2.37-2.508-2.37h-.115C12.135.209 11.669 0 11.265 0 8.159 0 6.675 3.877 6.21 5.846c-1.194.365-2.063.636-2.16.674-.675.213-.694.232-.772.87-.075.462-1.83 14.063-1.83 14.063L15.009 24l.927-21.166z"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="chatbot-header-title" id="chatbot-header-title">J&T Documentation Assistant</div>
+          <div class="chatbot-mode-badge">
+            <span class="chatbot-mode-dot"></span>
+            <span id="chatbot-mode-label">Mode 1: Local Knowledge Base (Verified)</span>
+          </div>
+        </div>
+      </div>
+      <div class="chatbot-header-actions">
+        <button type="button" class="chatbot-icon-btn" id="chatbot-clear-btn" title="Clear conversation">🗑️</button>
+        <button type="button" class="chatbot-icon-btn" id="chatbot-close-btn" title="Close assistant">✕</button>
+      </div>
+    </div>
+
+    <!-- Message History -->
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+
+    <!-- Suggested Quick Questions with Smooth Scroll Controls -->
+    <div class="chatbot-suggestions-wrapper">
+      <button type="button" class="suggest-scroll-btn suggest-scroll-prev" id="suggest-scroll-prev" aria-label="Scroll questions backward" title="Scroll questions">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="chatbot-suggestions" id="chatbot-suggestions" role="region" aria-label="Suggested questions"></div>
+      <button type="button" class="suggest-scroll-btn suggest-scroll-next" id="suggest-scroll-next" aria-label="Scroll questions forward" title="Scroll questions">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Input Bar -->
+    <div class="chatbot-input-bar">
+      <div class="chatbot-input-wrapper">
+        <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Ask a question in English, العربية, or 中文..." />
+        <button type="button" class="chatbot-send-btn" id="chatbot-send-btn" title="Send message" aria-label="Send message">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="locales/en.js"></script>
+  <script src="locales/ar.js"></script>
+  <script src="locales/zh.js"></script>
+  <script src="data/docs-content.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+
