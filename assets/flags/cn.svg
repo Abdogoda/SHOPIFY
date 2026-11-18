@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" class="flag-icon-svg" aria-label="Flag of China">
+  <defs>
+    <clipPath id="circle-cn"><circle cx="256" cy="256" r="256"/></clipPath>
+    <polygon id="cn-small-star" points="0,-18 5.3,-5.5 18.5,-5.5 7.8,2.6 11.9,15.5 0,7.5 -11.9,15.5 -7.8,2.6 -18.5,-5.5 -5.3,-5.5" fill="#FFDE00"/>
+  </defs>
+  <g clip-path="url(#circle-cn)">
+    <!-- Red Field -->
+    <rect width="512" height="512" fill="#DE2910"/>
+
+    <!-- Large Yellow Star -->
+    <polygon points="120,72 135.5,120 186,120 145.2,149.6 160.8,197.6 120,168 79.2,197.6 94.8,149.6 54,120 104.5,120" fill="#FFDE00"/>
+
+    <!-- 4 Small Yellow Stars in Arc, each oriented toward the large star's center (120, 135) -->
+    <!-- Star 1 -->
+    <g transform="translate(225, 75) rotate(-38.7)">
+      <use href="#cn-small-star"/>
+    </g>
+    <!-- Star 2 -->
+    <g transform="translate(265, 125) rotate(-14)">
+      <use href="#cn-small-star"/>
+    </g>
+    <!-- Star 3 -->
+    <g transform="translate(265, 195) rotate(16.7)">
+      <use href="#cn-small-star"/>
+    </g>
+    <!-- Star 4 -->
+    <g transform="translate(225, 250) rotate(40.6)">
+      <use href="#cn-small-star"/>
+    </g>
+  </g>
+</svg>

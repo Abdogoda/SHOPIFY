@@ -1296,7 +1296,20 @@ html[dir="rtl"] .search-result-item.selected {
   font-size: 1.1rem;
   flex-shrink: 0;
   background: var(--bg-subtle);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.lang-flag-img,
+.lang-opt-flag svg,
+.lang-opt-flag img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .lang-opt-info,

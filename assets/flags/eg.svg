@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" class="flag-icon-svg" aria-label="Flag of Egypt">
+  <defs>
+    <clipPath id="circle-eg"><circle cx="256" cy="256" r="256"/></clipPath>
+  </defs>
+  <g clip-path="url(#circle-eg)">
+    <!-- Tricolor Bands -->
+    <path fill="#C8102E" d="M0 0h512v170.7H0z"/>
+    <path fill="#FFFFFF" d="M0 170.7h512v170.6H0z"/>
+    <path fill="#000000" d="M0 341.3h512V512H0z"/>
+    <!-- Eagle of Saladin -->
+    <g fill="#C09300">
+      <!-- Head & Beak -->
+      <path d="M256 192c-8 0-14 5-14 12 0 4 2 8 6 10-3 1-5 4-5 8 0 5 4 9 9 9h16c5 0 9-4 9-9 0-4-2-7-5-8 4-2 6-6 6-10 0-7-6-12-14-12z"/>
+      <path d="M242 202c-6-1-10 3-11 7 3 2 7 1 11-2z" fill="#9A7500"/>
+      <!-- Wings -->
+      <path d="M216 218c-14 6-28 20-32 40-3 14 1 27 7 35 4 6 11 9 19 9l4-14c-5-2-9-5-11-9-3-6-4-13-1-20 4-11 14-19 22-23l-8-18z"/>
+      <path d="M296 218c14 6 28 20 32 40 3 14-1 27-7 35-4 6-11 9-19 9l-4-14c5-2 9-5 11-9 3-6 4-13 1-20-4-11-14-19-22-23l8-18z"/>
+      <!-- Body & Tail -->
+      <path d="M236 226h40v66c0 6-3 11-7 14l-13 15-13-15c-4-3-7-8-7-14v-66z"/>
+      <polygon points="244,306 256,328 268,306" fill="#C09300"/>
+      <!-- Base Scroll -->
+      <rect x="216" y="318" width="80" height="14" rx="4" fill="#C09300"/>
+      <rect x="222" y="321" width="68" height="8" rx="2" fill="#9A7500"/>
+      <!-- Shield on chest -->
+      <path d="M242 236h28v34c0 7-6 13-14 16-8-3-14-9-14-16v-34z" fill="#FFFFFF" stroke="#C09300" stroke-width="4"/>
+      <rect x="251" y="238" width="10" height="46" fill="#C09300"/>
+    </g>
+  </g>
+</svg>

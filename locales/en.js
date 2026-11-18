@@ -14,6 +14,8 @@ window.JNT_LOCALES.en = {
   },
 
   ui: {
+    themeMenuTitle: 'Interface Appearance',
+    langMenuTitle: 'Documentation Language',
     backToTop: 'Back to top',
     brandTitle: 'J&T Express Help Center',
     brandSubtitle: 'Official Merchant Documentation',

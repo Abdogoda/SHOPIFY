@@ -14,6 +14,8 @@ window.JNT_LOCALES.zh = {
   },
 
   ui: {
+    themeMenuTitle: '界面外观主题',
+    langMenuTitle: '文档显示语言',
     backToTop: '回到顶部',
     brandTitle: '极兔速递 J&T Express 帮助中心',
     brandSubtitle: 'Shopify 插件官方商户操作指南',

@@ -14,6 +14,8 @@ window.JNT_LOCALES.ar = {
   },
 
   ui: {
+    themeMenuTitle: 'مظهر الواجهة',
+    langMenuTitle: 'لغة التوثيق',
     backToTop: 'العودة للأعلى',
     brandTitle: 'مركز مساعدة J&T Express',
     brandSubtitle: 'التوثيق الرسمي لتطبيق شوبيفاي',
