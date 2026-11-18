@@ -1558,6 +1558,17 @@ html[dir="rtl"] .search-result-item.selected {
   width: 14px;
   height: 14px;
   transition: transform var(--transition-fast);
+  animation: none !important;
+}
+
+.sidebar .sidebar-nav-icon svg,
+.sidebar .sidebar-nav-num svg,
+.sidebar .section-svg,
+.sidebar-nav-link .sidebar-nav-icon svg,
+.sidebar-nav-link .section-svg,
+.sidebar-nav-link:hover .sidebar-nav-icon svg,
+.sidebar-nav-link:hover .section-svg {
+  animation: none !important;
 }
 
 .sidebar-nav-link:hover .sidebar-nav-icon,
@@ -1879,7 +1890,6 @@ html[dir="rtl"] .search-result-item.selected {
 
 /* Universal SVG Icon Setup */
 .section-icon-badge svg,
-.sidebar-nav-icon svg,
 .section-svg {
   transform-origin: center center;
   will-change: transform;
@@ -1898,8 +1908,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-introduction {
   animation: iconAnimLayers 3.8s ease-in-out infinite;
 }
-.doc-section:hover .icon-introduction svg,
-.sidebar-nav-link:hover .icon-introduction svg {
+.doc-section:hover .icon-introduction svg {
   animation: iconAnimLayers 1.6s ease-in-out infinite;
   transform: translateY(-3px) scale(1.1);
 }
@@ -1923,8 +1932,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-login-linking {
   animation: iconAnimLink 4.2s ease-in-out infinite;
 }
-.doc-section:hover .icon-login-linking svg,
-.sidebar-nav-link:hover .icon-login-linking svg {
+.doc-section:hover .icon-login-linking svg {
   animation: iconAnimLink 1.4s ease-in-out infinite;
   transform: rotate(-12deg) scale(1.15);
 }
@@ -1949,8 +1957,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-overview {
   animation: iconAnimDashboard 3.6s ease-in-out infinite;
 }
-.doc-section:hover .icon-overview svg,
-.sidebar-nav-link:hover .icon-overview svg {
+.doc-section:hover .icon-overview svg {
   animation: iconAnimDashboard 1.2s ease-in-out infinite;
   transform: scale(1.12);
 }
@@ -1982,8 +1989,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-orders {
   animation: iconAnimParcel 3.4s ease-in-out infinite;
 }
-.doc-section:hover .icon-orders svg,
-.sidebar-nav-link:hover .icon-orders svg {
+.doc-section:hover .icon-orders svg {
   animation: iconAnimParcelHover 1.2s ease-in-out infinite;
 }
 
@@ -2020,8 +2026,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-shipments {
   animation: iconAnimTruck 3s ease-in-out infinite;
 }
-.doc-section:hover .icon-shipments svg,
-.sidebar-nav-link:hover .icon-shipments svg {
+.doc-section:hover .icon-shipments svg {
   animation: iconAnimTruckHover 1s ease-in-out infinite;
 }
 
@@ -2059,8 +2064,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-settings {
   animation: iconAnimGear 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
-.doc-section:hover .icon-settings svg,
-.sidebar-nav-link:hover .icon-settings svg {
+.doc-section:hover .icon-settings svg {
   animation: iconAnimWorkflow 2s linear infinite;
   transform: scale(1.12);
 }
@@ -2078,8 +2082,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-workflow {
   animation: iconAnimWorkflow 6s linear infinite;
 }
-.doc-section:hover .icon-workflow svg,
-.sidebar-nav-link:hover .icon-workflow svg {
+.doc-section:hover .icon-workflow svg {
   animation: iconAnimWorkflow 1.6s linear infinite;
   transform: scale(1.12);
 }
@@ -2103,8 +2106,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-troubleshooting-faq {
   animation: iconAnimFaq 4s ease-in-out infinite;
 }
-.doc-section:hover .icon-troubleshooting-faq svg,
-.sidebar-nav-link:hover .icon-troubleshooting-faq svg {
+.doc-section:hover .icon-troubleshooting-faq svg {
   animation: none;
   transform: translateY(-3.5px) scale(1.15) rotate(8deg);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -2149,8 +2151,7 @@ html[dir="rtl"] .search-result-item.selected {
 .svg-important-notes {
   animation: iconAnimAlert 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
-.doc-section:hover .icon-important-notes svg,
-.sidebar-nav-link:hover .icon-important-notes svg {
+.doc-section:hover .icon-important-notes svg {
   animation: iconAnimAlertHover 0.8s ease-in-out infinite;
 }
 
